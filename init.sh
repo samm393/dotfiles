@@ -38,7 +38,16 @@ sudo apt-get update
 
 # Install base packages
 echo "📦 Installing base packages..."
-sudo apt-get install -y zsh tmux git curl fzf
+sudo apt-get install -y zsh tmux git curl
+
+# Install fzf from git (Ubuntu apt version is too old)
+if [[ ! -d "$HOME/.fzf" ]]; then
+    echo "📦 Installing fzf..."
+    git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME/.fzf"
+    "$HOME/.fzf/install" --all --no-bash --no-fish
+else
+    echo "✅ fzf already installed"
+fi
 
 # Install starship prompt
 if ! command -v starship &> /dev/null; then
@@ -94,8 +103,10 @@ source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 alias ls='ls --color=auto'
 
 # fzf
-source <(fzf --zsh)
-export FZF_CTRL_R_OPTS="--tmux"
+if [ -f ~/.fzf.zsh ]; then
+    source ~/.fzf.zsh
+    export FZF_CTRL_R_OPTS="--tmux"
+fi
 
 # Conda (if installed)
 if [ -f "$HOME/miniconda3/bin/conda" ] || [ -f "$HOME/anaconda3/bin/conda" ]; then
