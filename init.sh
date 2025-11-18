@@ -32,6 +32,11 @@ fi
 
 echo "📁 Dotfiles directory: $DOTFILES_DIR"
 
+# Configure git
+echo "🔧 Configuring git..."
+git config --global user.email "martin.samarthur@gmail.com"
+git config --global user.name "samm393"
+
 # Update package list
 echo "🔄 Updating package list..."
 sudo apt-get update
