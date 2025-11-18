@@ -90,6 +90,9 @@ done
 # Create .zshrc adapted for Linux
 echo "🔗 Creating .zshrc..."
 cat > "$HOME/.zshrc" << 'EOF'
+# Terminal settings
+export TERM=xterm-256color
+
 # Starship prompt
 eval "$(starship init zsh)"
 
